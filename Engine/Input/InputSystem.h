@@ -1,7 +1,8 @@
 #pragma once
 #include "Framework/System.h"
-#include <iostream>
+#include <SDL.h>
 #include <vector>
+#include <algorithm>
 
 namespace nc
 {
@@ -17,7 +18,7 @@ namespace nc
 			Release
 		};
 
-		const Uint8* SDL_GetKeyboardState(int* numkeys);
+		//const Uint8* SDL_GetKeyboardState(int* numkeys);
 
 		eKeyState GetKeyState(int id);
 		bool IsKeyDown(int id);
@@ -34,8 +35,11 @@ namespace nc
 	private:
 		std::vector<Uint8> keyboardState;
 		std::vector<Uint8> prevKeyboardState;
-		//std::vector<std::uint8_t> keyboardState;
-		//std::vector<std::uint8_t> prevKeyboardState;
 		int numKeys;
 	};
+
+	//const Uint8* InputSystem::SDL_GetKeyboardState(int* numkeys)
+	//{
+	//	return nullptr;
+	//}
 }

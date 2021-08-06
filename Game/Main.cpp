@@ -36,6 +36,7 @@ int main(int, char**)
 		}
 
 		engine.Update(0);
+		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 		scene.Update(0);
 
 		engine.Get<nc::Renderer>()->BeginFrame();

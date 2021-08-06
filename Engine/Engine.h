@@ -27,6 +27,9 @@
 //core
 #include "Core/FileSystem.h"
 
+//InputSystem
+#include "Input/InputSystem.h"
+
 #include <vector>
 #include <memory>
 #include <algorithm>

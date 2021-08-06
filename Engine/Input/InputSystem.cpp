@@ -1,32 +1,14 @@
 #include "InputSystem.h"
+#include <iostream>
 
 namespace nc
 {
-	const Uint8* InputSystem::SDL_GetKeyboardState(int* numkeys)
-	{
-		return nullptr;
-	}
-
-	InputSystem::eKeyState InputSystem::GetKeyState(int id)
-	{
-		return eKeyState();
-	}
-	
-	bool InputSystem::IsKeyDown(int id)
-	{
-		return false;
-	}
-
-	bool InputSystem::IsPreviousKeyDown(int id)
-	{
-		return false;
-	}
 
 	void InputSystem::Startup()
 	{
-		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(<pointer to numKeys>);
-		keyboardState.<resize(? ? ? )>;
-		std::copy(< https://www.includehelp.com/stl/how-to-copy-array-elements-to-a-vector.aspx>);
+		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(&numKeys);
+		keyboardState.resize(numKeys);
+		std::copy(keyboardStateSDL, keyboardStateSDL + numKeys, keyboardState.begin());
 		prevKeyboardState = keyboardState;
 	}
 
@@ -38,25 +20,37 @@ namespace nc
 	void InputSystem::Update(float dt)
 	{
 		prevKeyboardState = keyboardState;
-
 		const Uint8* keyboardStateSDL = SDL_GetKeyboardState(nullptr);
-		std::copy(< https://www.includehelp.com/stl/how-to-copy-array-elements-to-a-vector.aspx>);
+		std::copy(keyboardStateSDL, keyboardStateSDL + numKeys, keyboardState.begin());
+	}
 
-		bool keyDown = <get key down>;
-		bool prevKeyDown = <get previous key down>;
-
+	InputSystem::eKeyState InputSystem::GetKeyState(int id)
+	{
 		eKeyState state = eKeyState::Idle;
+
+		bool keyDown = IsKeyDown(id);
+		bool prevKeyDown = IsPreviousKeyDown(id);
 
 		if (keyDown)
 		{
-			state = (prevKeyDown) ? < ? ? ? > : < ? ? ? >;
+			state = (prevKeyDown) ? eKeyState::Held : eKeyState::Pressed;
 		}
 		else
 		{
-			state = (prevKeyDown) ? < ? ? ? > : < ? ? ? >;
+			state = (prevKeyDown) ? eKeyState::Release : eKeyState::Idle;
 		}
 
 		return state;
-
 	}
+	
+	bool InputSystem::IsKeyDown(int id)
+	{
+		return keyboardState[id];
+	}
+
+	bool InputSystem::IsPreviousKeyDown(int id)
+	{
+		return prevKeyboardState[id];
+	}
+
 }
