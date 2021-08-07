@@ -26,9 +26,7 @@ namespace nc
 
 		// Inherited via System
 		virtual void Startup() override;
-
 		virtual void Shutdown() override;
-
 		virtual void Update(float dt) override;
 
 

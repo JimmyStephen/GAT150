@@ -25,8 +25,21 @@ int main(int, char**)
 
 	bool quit = false;
 	SDL_Event event;
+	float quitTime = engine.time.time + 3;
+
 	while (!quit)
 	{
+		engine.Update();
+		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
+		scene.Update(engine.time.deltaTime);
+		std::cout << engine.time.time << std::endl;
+
+		engine.Get<nc::Renderer>()->BeginFrame();
+
+		scene.Draw(engine.Get<nc::Renderer>());
+
+		engine.Get<nc::Renderer>()->EndFrame();
+
 		SDL_PollEvent(&event);
 		switch (event.type)
 		{
@@ -34,16 +47,6 @@ int main(int, char**)
 			quit = true;
 			break;
 		}
-
-		engine.Update(0);
-		quit = (engine.Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
-		scene.Update(0);
-
-		engine.Get<nc::Renderer>()->BeginFrame();
-
-		scene.Draw(engine.Get<nc::Renderer>());
-
-		engine.Get<nc::Renderer>()->EndFrame();
 	}
 
 	SDL_Quit();

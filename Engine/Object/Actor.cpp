@@ -1,12 +1,16 @@
 #include "Actor.h"
 #include "Graphics/Renderer.h"
+#include "Math/Random.h"
 #include <algorithm>
 
 namespace nc
 {
 	void Actor::Update(float dt)
 	{
-		transform.rotation += .5f;
+		transform.rotation		-= 2 * 180 * dt;
+		transform.position.x	+= nc::RandomRangeInt(-100,100) * (100.0f * dt);
+		transform.position.y	+= nc::RandomRangeInt(-100,100) * (100.0f * dt);
+
 		transform.Update();
 		std::for_each(children.begin(), children.end(), [](auto& child) {child->transform.Update(child->parent->transform.matrix); });
 	}
@@ -18,7 +22,7 @@ namespace nc
 	
 	float Actor::GetRadius()
 	{
-		return std::max(texture->GetSize().x, texture->GetSize().y) * 0.5f;
+		return (texture) ? texture->GetSize().Length() * .5 : 0.0f;
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor)

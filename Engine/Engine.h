@@ -26,6 +26,7 @@
 
 //core
 #include "Core/FileSystem.h"
+#include "Core/Time.h"
 
 //InputSystem
 #include "Input/InputSystem.h"
@@ -39,9 +40,11 @@ namespace nc
 	class Engine
 	{
 	public:
+		FrameTimer time;
+
 		void Startup();
 		void Shutdown();
-		void Update(float dt);
+		void Update();
 		void Draw();
 
 		template<typename T>
