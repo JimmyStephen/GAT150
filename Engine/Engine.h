@@ -29,6 +29,7 @@
 //core
 #include "Core/Utilities.h"
 #include "Core/FileSystem.h"
+#include "Core/FileIO.h"
 #include "Core/Time.h"
 
 //InputSystem

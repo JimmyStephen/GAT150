@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
+    <ClCompile Include="Core\FileIO.cpp" />
     <ClCompile Include="Core\FileSystem.cpp" />
     <ClCompile Include="Core\Time.cpp" />
     <ClCompile Include="Core\Utilities.cpp" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="Audio\AudioChannel.h" />
     <ClInclude Include="Audio\AudioSystem.h" />
+    <ClInclude Include="Core\FileIO.h" />
     <ClInclude Include="Core\FileSystem.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Core\Utilities.h" />
