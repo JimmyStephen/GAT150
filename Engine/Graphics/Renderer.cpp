@@ -1,6 +1,8 @@
 #include "Renderer.h"
 #include <SDL_image.h>
 #include <iostream>
+#include <SDL_ttf.h> 
+
 namespace nc
 {
 	void Renderer::Startup()
@@ -10,11 +12,13 @@ namespace nc
 			std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		}
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		TTF_Init();
 	}
 	
 	void Renderer::Shutdown()
 	{
 		IMG_Quit();
+		TTF_Quit();
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 	}
@@ -64,7 +68,7 @@ namespace nc
 		size = size * transform.scale;
 
 
-		SDL_Rect dest{ transform.position.x, transform.position.y, size.x, size.y };
+		SDL_Rect dest{ (int)transform.position.x, (int)transform.position.y, (int)size.x, (int)size.y };
 
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, transform.rotation, nullptr, SDL_FLIP_NONE);
 	}

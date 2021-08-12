@@ -2,9 +2,17 @@
 #include "Graphics/Renderer.h"
 #include <SDL_image.h>
 #include <iostream>
+#include <cassert>
 
 namespace nc
 {
+	Texture::Texture(Renderer* renderer) {
+
+		assert(renderer);
+
+		this->renderer = renderer->renderer;
+	}
+
 	bool Texture::Load(const std::string& name, void* data)
 	{
 		renderer = static_cast<Renderer*>(data)->renderer;
@@ -18,9 +26,25 @@ namespace nc
 		texture = SDL_CreateTextureFromSurface(renderer, surface);
 		SDL_FreeSurface(surface);
 		if (texture == nullptr){
-			std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
+			std::cout << "SDL_CreateTextureFromSurface Error (load): " << SDL_GetError() << std::endl;
 			return false;
 		}
+		return true;
+	}
+
+	bool Texture::Create(SDL_Surface* surface)
+	{
+		assert(surface);
+
+		// create texture
+		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_FreeSurface(surface);
+		if (texture == nullptr)
+		{
+			std::cout << "SDL_CreateTextureFromSurface Error (Create): " << SDL_GetError() << std::endl;
+			return false;
+		}
+
 		return true;
 	}
 

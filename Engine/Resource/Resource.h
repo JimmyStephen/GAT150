@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 
-class Resource
+namespace nc
 {
-	virtual bool Load(const std::string& filename, void* data = nullptr) = 0;
-};
+	class Resource
+	{
+		virtual bool Load(const std::string& filename, void* data = nullptr) = 0;
+	};
+}
