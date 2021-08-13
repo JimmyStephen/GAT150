@@ -20,7 +20,7 @@ namespace nc
 	
 	float Actor::GetRadius()
 	{
-		return (texture) ? texture->GetSize().Length() * .5f : 0.0f;
+		return (texture) ? texture->GetSize().Length() * .5f * transform.scale.x: 0.0f;
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor)

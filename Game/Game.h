@@ -29,6 +29,8 @@ public:
 	void StartLevel();
 	void StartEndlessLevel();
 	void GameEndless();
+	void DrawTitle();
+
 	bool IsQuit() { return quit; }
 public:
 	std::unique_ptr<nc::Engine> engine;

@@ -38,9 +38,9 @@ void Player::Update(float dt)
 
     //movement
     float thrust = 0;
-    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Pressed) transform.rotation -= 5 * dt;
-    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Pressed) transform.rotation += 5 * dt;
-    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Pressed) thrust = speed;
+    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_A) == nc::InputSystem::eKeyState::Held) transform.rotation -= 5 * dt;
+    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_D) == nc::InputSystem::eKeyState::Held) transform.rotation += 5 * dt;
+    if (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_W) == nc::InputSystem::eKeyState::Held) thrust = speed;
 
     transform.position += nc::Vector2::Rotate(nc::Vector2::down, transform.rotation) * thrust * dt;
     transform.position.x = nc::Wrap(transform.position.x, 0.0f, 800.0f);
@@ -49,13 +49,16 @@ void Player::Update(float dt)
     //fire
     fireTimer -= dt;
     immunityFrameTimer -= dt;
-    if (fireTimer <= 0 && (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed))
+    if (fireTimer <= 0 && (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Held))
     {
         std::shared_ptr<nc::Texture> texture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("One_Alex_Churro.png", scene->engine->Get<nc::Renderer>());
 
         {
             nc::Transform t = children[0]->transform;
-            t.scale = .5;
+            t.scale = .15;
+            t.position.x += 30;
+            t.position.y += 40;
+            //t.rotation -= nc::HalfPi;
 
             std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, texture, 300.0f);
             projectile->tag = "player";

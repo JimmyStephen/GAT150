@@ -13,7 +13,7 @@ private:
 	float immunityFrameTimer = 0;
 	float fireRate = 0.25f;
 	float fireTimer;
-	float speed{ 300 };
+	float speed{ 1000 };
 	nc::Vector2 velocity;
 
 };
