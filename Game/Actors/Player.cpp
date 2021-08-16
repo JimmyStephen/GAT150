@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-Player::Player(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed) : nc::Actor{ transform, texture }, speed{ speed }
+Player::Player(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed, bool isEndless) : nc::Actor{ transform, texture }, speed{ speed }, isEndless{isEndless}
 {
     std::unique_ptr locator = std::make_unique<Actor>();
     locator->transform.localPosition = nc::Vector2{ 0,4 };
@@ -52,18 +52,24 @@ void Player::Update(float dt)
     if (fireTimer <= 0 && (scene->engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Held))
     {
         std::shared_ptr<nc::Texture> texture = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("One_Alex_Churro.png", scene->engine->Get<nc::Renderer>());
+        std::shared_ptr<nc::Texture> texture2 = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Star.png", scene->engine->Get<nc::Renderer>());
 
         {
             nc::Transform t = children[0]->transform;
-            t.scale = .15;
-            t.position.x += 30;
-            t.position.y += 40;
-            //t.rotation -= nc::HalfPi;
-
-            std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, texture, 300.0f);
-            projectile->tag = "player";
-            
-            scene->AddActor(std::move(projectile));
+            if (isEndless) {
+                t.scale = .02;
+                std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, texture2, 300.0f);
+                projectile->tag = "player";
+                scene->AddActor(std::move(projectile));
+            }
+            else {
+                t.scale = .15;
+                t.position.x += 30;
+                t.position.y += 40;
+                std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, texture, 300.0f);
+                projectile->tag = "player";
+                scene->AddActor(std::move(projectile));
+            }
         }
 
         scene->engine->Get<nc::AudioSystem>()->PlayAudio("playerShoot");

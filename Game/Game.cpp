@@ -25,14 +25,14 @@ void Game::Initialize()
 
 	// get font from resource system
 	int size = 16;
-	font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("Fonts/united.ttf", &size);
+	font = engine->Get<nc::ResourceSystem>()->Get<nc::Font>("Fonts/8514oem.fon", &size);
 
 	// create font texture
-	textTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+//	textTexture = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 	// set font texture with font surface
-	textTexture->Create(font->CreateSurface("UwU", nc::Color{ 1, 1, 1 }));
+//	textTexture->Create(font->CreateSurface("UwU", nc::Color{ 1, 1, 1 }));
 	// add font texture to resource system
-	engine->Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
+//	engine->Get<nc::ResourceSystem>()->Add("textTexture", textTexture);
 
 	//make actors
 	//for (size_t i = 0; i < 25; i++) {
@@ -99,7 +99,7 @@ void Game::Update()
 		stateTimer = 2;
 		break;
 	case Game::eState::GameOver:
-		stateTimer -= .05;
+		stateTimer -= .05f;
 		scene->RemoveAllActor();
 
 		if (stateTimer <= 0) {
@@ -120,14 +120,14 @@ void Game::Update()
 
 	quit = (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == nc::InputSystem::eKeyState::Pressed);
 
-	if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Held)
-	{
-		nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
-		std::cout << position.x << " " << position.y << std::endl;
-		engine->Get<nc::ParticleSystem>()->Create({ position.x,position.y },1,1,texture2,1);
-		engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, 1, false);
-		musicChannel.SetPitch(nc::RandomRange(.02f, 2.0f));
-	}
+	//if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Held)
+	//{
+	//	nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
+	//	std::cout << position.x << " " << position.y << std::endl;
+	//	engine->Get<nc::ParticleSystem>()->Create({ position.x,position.y },1,1,texture2,1);
+	//	engine->Get<nc::AudioSystem>()->PlayAudio("explosion", 1, 1, false);
+	//	musicChannel.SetPitch(nc::RandomRange(.02f, 2.0f));
+	//}
 }
 
 void Game::Draw()
@@ -142,23 +142,23 @@ void Game::Draw()
 		nc::Transform t;
 		nc::Transform t2;
 		nc::Transform t3;
-		
+
 		std::shared_ptr<nc::Texture> textTexture1;
 		std::shared_ptr<nc::Texture> textTexture2;
 		std::shared_ptr<nc::Texture> textTexture3;
-		
-		t.position =  { 300, 250 };
+
+		t.position = { 300, 250 };
 		t2.position = { 250, 310 };
 		t3.position = { 220, 330 };
-		
+
 		textTexture1 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 		textTexture1->Create(font->CreateSurface("The Accident Wasn't Your Fault", nc::Color{ 1, 1, 1 }));
 		engine->Get<nc::ResourceSystem>()->Add("textTexture1", textTexture1);
-		
+
 		textTexture2 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 		textTexture2->Create(font->CreateSurface("Press [TAB] To Play Battle of The Alex's", nc::Color{ 1, 1, 1 }));
 		engine->Get<nc::ResourceSystem>()->Add("textTexture2", textTexture2);
-	
+
 		textTexture3 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 		textTexture3->Create(font->CreateSurface("Press [SPACE] to Play Cold War (Endless Mode!)", nc::Color{ 1, 1, 1 }));
 		engine->Get<nc::ResourceSystem>()->Add("textTexture3", textTexture3);
@@ -167,7 +167,7 @@ void Game::Draw()
 		engine->Get<nc::Renderer>()->Draw(textTexture2, t2);
 		engine->Get<nc::Renderer>()->Draw(textTexture3, t3);
 	}
-		break;
+	break;
 	case Game::eState::StartGame:
 		break;
 	case Game::eState::StartEndless:
@@ -191,7 +191,7 @@ void Game::Draw()
 		nc::Transform l;
 		std::shared_ptr<nc::Texture> textTexturel;
 		l.position = { 380, 200 };
-		if (destroyedAll == true){
+		if (destroyedAll == true) {
 			textTexturel = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
 			textTexturel->Create(font->CreateSurface("You Won", nc::Color{ 1, 1, 1 }));
 			engine->Get<nc::ResourceSystem>()->Add("textTexturel", textTexturel);
@@ -222,7 +222,7 @@ void Game::Draw()
 		engine->Get<nc::ResourceSystem>()->Add("textTexture2", textTexture2);
 
 		textTexture3 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
-		textTexture3->Create(font->CreateSurface("Press [SPACE] to Play Cold War (Endless Mode!)", nc::Color{ 1, 1, 1 }));
+		textTexture3->Create(font->CreateSurface("Press [SPACE] to Play Cold War(Endless Mode!)", nc::Color{ 1, 1, 1 }));
 		engine->Get<nc::ResourceSystem>()->Add("textTexture3", textTexture3);
 
 		engine->Get<nc::Renderer>()->Draw(textTexturel, l);
@@ -230,64 +230,74 @@ void Game::Draw()
 		engine->Get<nc::Renderer>()->Draw(textTexture2, t2);
 		engine->Get<nc::Renderer>()->Draw(textTexture3, t3);
 	}
-		break;
+	break;
 	default:
 		break;
 	}
+	//Score, Lives, Highscore, exc
+	{
+		nc::Transform t;
+		nc::Transform t2;
+
+		std::shared_ptr<nc::Texture> textTexture1;
+		std::shared_ptr<nc::Texture> textTexture2;
+
+		t.position = { 30, 30 };
+		t2.position = { 30, 50 };
+
+		textTexture1 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		textTexture1->Create(font->CreateSurface("Score: " + std::to_string(score), nc::Color{ 1, 1, 1 }));
+		engine->Get<nc::ResourceSystem>()->Add("textTexture1", textTexture1);
+
+		textTexture2 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+		textTexture2->Create(font->CreateSurface("Lives: " + std::to_string(lives), nc::Color{ 1, 1, 1 }));
+		engine->Get<nc::ResourceSystem>()->Add("textTexture2", textTexture2);
+
+		engine->Get<nc::Renderer>()->Draw(textTexture1, t);
+		engine->Get<nc::Renderer>()->Draw(textTexture2, t2);
+
+		if (state == eState::GameEndless) {
+			nc::Transform t3;
+			std::shared_ptr<nc::Texture> textTexture3;
+			nc::Transform t4;
+			std::shared_ptr<nc::Texture> textTexture4;
+			
+			t3.position = { 330, 30 };
+			t4.position = { 600, 30 };
+
+			textTexture3 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+			textTexture3->Create(font->CreateSurface("Gain Life In " + std::to_string(gainLife) + " Points", nc::Color{ 1, 1, 1 }));
+			engine->Get<nc::ResourceSystem>()->Add("textTexture3", textTexture3);
+
+			textTexture4 = std::make_shared<nc::Texture>(engine->Get<nc::Renderer>());
+			textTexture4->Create(font->CreateSurface("High Score: " + std::to_string(highScore), nc::Color{ 1, 1, 1 }));
+			engine->Get<nc::ResourceSystem>()->Add("textTexture4", textTexture4);
+
+			engine->Get<nc::Renderer>()->Draw(textTexture3, t3);
+			engine->Get<nc::Renderer>()->Draw(textTexture4, t4);
+		}
+	}
+
 	//end
 	scene->Draw(engine->Get<nc::Renderer>());
 	engine->Draw(engine->Get<nc::Renderer>());
 	engine->Get<nc::Renderer>()->EndFrame();
-
-	//graphics.SetColor(nc::Color::white);
-	//graphics.DrawString(30, 30, "Score: ");
-	//graphics.DrawString(75, 30, std::to_string(score).c_str());
-	//graphics.DrawString(30, 50, "Lives: ");
-	//graphics.DrawString(75, 50, std::to_string(lives).c_str());
-
-	//if (state == eState::GameEndless) {
-	//	graphics.DrawString(330, 30, "Gain Life In ");
-	//	graphics.DrawString(420, 30, std::to_string(gainLife).c_str());
-	//	graphics.DrawString(450, 30, "Points");
-	//	graphics.DrawString(700, 30, "High Score");
-	//	graphics.DrawString(700, 50, std::to_string(highScore).c_str());
-	//}
-
-
-	//nc::Transform t;
-	//t.position = { 30, 30 };
-	//engine->Get<nc::Renderer>()->Draw(textTexture, t);
-
-	//scene->Draw(engine->Get<nc::Renderer>());
-	//engine->Draw(engine->Get<nc::Renderer>());
-
-	////make text follow mouse
-	//if (engine->Get<nc::InputSystem>()->GetButtonState((int)nc::InputSystem::eMouseButton::Left) == nc::InputSystem::eKeyState::Held)
-	//{
-	//	nc::Vector2 position = engine->Get<nc::InputSystem>()->GetMousePosition();
-	//	position.x -= 65;
-	//	position.y -= 25;
-	//	engine->Get<nc::Renderer>()->Draw(textTexture, position);
-	//}
-
-
-
 }
 
 void Game::OnAddPoints(const nc::Event& event)
 {
-	//score += std::get<int>(event.data);
-	//if (state == eState::GameEndless) {
-	//	gainLife -= 100;
-	//	if (gainLife == 0) {
-	//		lives++;
-	//		gainLife = 1000;
-	//	}
-	//	if (highScore < score) {
-	//		nc::FileIO::WriteHighScore("Highscore.txt", score);
-	//		highScore = score;
-	//	}
-	//}
+	score += std::get<int>(event.data);
+	if (state == eState::GameEndless) {
+		gainLife -= 100;
+		if (gainLife == 0) {
+			lives++;
+			gainLife = 1000;
+		}
+		if (highScore < score) {
+			nc::FileIO::WriteHighScore("Highscore.txt", score);
+			highScore = score;
+		}
+	}
 }
 
 void Game::OnPlayerDead(const nc::Event& event)
@@ -303,62 +313,52 @@ void Game::StartLevel() {
 	//asteroid (replace "AleX_Ship.png" with astroid)
 	std::shared_ptr<nc::Texture> astroid = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alexis_Ship.png", engine->Get<nc::Renderer>());
 
-	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, .5 }, spaceShip, 300.0f));
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, .5f }, spaceShip, 300.0f));
 	for (size_t i = 0; i < 25; i++)
 	{
-		scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .1 }, astroid, 150.0f, false));
+		scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .1f }, astroid, 150.0f, false));
 	}
 }
 
 void Game::StartEndlessLevel() {
 
-	////flag
-//	std::shared_ptr<nc::Texture> spaceShip = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alex_Ship.png", engine->Get<nc::Renderer>());
+	////Flag
+	std::shared_ptr<nc::Texture> spaceShip = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Flag.png", engine->Get<nc::Renderer>());
 
-	////hammer
-//	std::shared_ptr<nc::Texture> astroid = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alex_Ship.png", engine->Get<nc::Renderer>());
+	//Enemy
+	std::shared_ptr<nc::Texture> astroid = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Hammer.png", engine->Get<nc::Renderer>());
 
-
-	//scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, 10 }, shapeCustom2, 300.0f));
-	//	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, .5 }, spaceShip, 300.0f));
-
-	//scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 5 }, hammer, 100.0f, false));
-	//	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{400, 300}, 0, .5 }, astroid, 300.0f));
+	scene->AddActor(std::make_unique<Player>(nc::Transform{ nc::Vector2{400, 300}, 0, .08f }, spaceShip, 300.0f, true));
+	scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .05f }, astroid, 150.0f, false));
 }
 
 void Game::GameEndless() {
 	//mixed
-//	std::shared_ptr<nc::Texture> strong = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alex_Ship.png", engine->Get<nc::Renderer>());
-
+	std::shared_ptr<nc::Texture> strong = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("HammerAndSickle.png", engine->Get<nc::Renderer>());
 	//melee
-//	std::shared_ptr<nc::Texture> melee = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alex_Ship.png", engine->Get<nc::Renderer>());
-
+	std::shared_ptr<nc::Texture> melee = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Hammer.png", engine->Get<nc::Renderer>());
 	//ranged
-//	std::shared_ptr<nc::Texture> ranged = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Alex_Ship.png", engine->Get<nc::Renderer>());
+	std::shared_ptr<nc::Texture> ranged = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("Sickle.png", engine->Get<nc::Renderer>());
 
 
-	//if (scene->GetActors<Enemy>().size() < (score / 100))
-	//{
-	//	if (score >= 1000 && score < 2000) {
-	//		if (summonRanged) {
-	//			scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 5 }, sickle, 50.0f, true));
-	//			summonRanged = false;
-	//		}
-	//		else {
-	//			scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 5 }, hammer, 150.0f, false));
-	//			summonRanged = true;
-	//		}
-	//	}
-	//	else if (score >= 2000) {
-	//		scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 5 }, shapeCustom3, 150.0f, true));
-	//	}
-	//	else {
-	//		scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), 5 }, hammer, 100.0f, false));
-	//	}
+	if (scene->GetActors<Enemy>().size() < (score / 100))
+	{
+		if (score >= 1000 && score < 2000) {
+			if (summonRanged) {
+				scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .05f }, ranged, 150.0f, true));
+				summonRanged = false;
+			}
+			else {
+				scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .05f }, melee, 150.0f, false));
+
+				summonRanged = true;
+			}
+		}
+		else if (score >= 2000) {
+			scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .05f }, strong, 150.0f, true));
+		}
+		else {
+			scene->AddActor(std::make_unique<Enemy>(nc::Transform{ nc::Vector2{nc::RandomRange(0.0f, 10.0f), nc::RandomRange(0.0f, 600.0f)}, nc::RandomRange(0.0f, nc::TwoPi), .05f }, melee, 150.0f, false));
+		}
 	}
-
-
-void Game::DrawTitle() {
-
-
 }

@@ -46,16 +46,15 @@ void Enemy::Update(float dt)
 			if (fireTimer <= 0 and angle <= nc::DegToRad(15))
 			{
 				fireTimer = fireRate;
-				//std::vector<nc::Vector2> points = { {-5,-5}, {5,-5}, {5,5}, {-5,5}, {-5,-5} };
-				//std::shared_ptr<nc::Shape> shape = std::make_shared<nc::Shape>(points, nc::Color{ nc::Random(), nc::Random(), nc::Random() });
-				//std::shared_ptr<nc::Shape> shape = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Shape>("hammer.txt");
-				
+				std::shared_ptr<nc::Texture> texture2 = scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("EnemyStar.png", scene->engine->Get<nc::Renderer>());
+
 				nc::Transform t = transform;
-				t.scale = .75f;
+				t.scale = .25f;
 				t.rotation += nc::HalfPi;
 
-				std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, scene->engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("bullet.txt"), 300.0f);
+				std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(t, texture2, 300.0f);
 				projectile->tag = "enemy";
+				//projectile->tag = "player";
 				scene->AddActor(std::move(projectile));
 				
 				scene->engine->Get<nc::AudioSystem>()->PlayAudio("enemyShoot");
