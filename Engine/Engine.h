@@ -19,6 +19,9 @@
 #include "Framework/System.h"
 #include "Framework/EventSystem.h"
 
+//Component
+#include "Component/SpriteComponent.h"
+
 //resource
 #include "Resource/ResourceSystem.h"
 

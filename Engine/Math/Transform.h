@@ -19,7 +19,7 @@ namespace nc
 		Matrix33 matrix;
 
 		Transform() {}
-		Transform(const Vector2& position, float rotation, float scale) : position{ position }
+		Transform(const Vector2& position, float rotation = 0, float scale = 1) : position{ position }
 			, rotation{ rotation }, scale{ scale } {}
 
 		void Update();

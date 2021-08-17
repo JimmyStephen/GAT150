@@ -5,7 +5,7 @@ class Enemy : public nc::Actor
 {
 public:
 	//Enemy(const nc::Transform transform, std::shared_ptr<nc::Shape> shape, float speed) : nc::Actor{ transform, shape }, speed{ speed } {};
-	Enemy(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed, bool doesFire) : nc::Actor{ transform, texture }, speed{ speed }, doesShoot{ doesFire } {};
+	Enemy(const nc::Transform transform, std::shared_ptr<nc::Texture> texture, float speed, bool doesFire) : nc::Actor{ transform }, speed{ speed }, doesShoot{ doesFire } {};
 	void OnCollision(Actor* actor) override;
 
 	virtual void Update(float dt) override;
