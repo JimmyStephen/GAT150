@@ -13,4 +13,12 @@ namespace nc {
 	{
 		renderer->Draw(texture, owner->transform);
 	}
+	bool SpriteComponent::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+	bool SpriteComponent::Read(const rapidjson::Value& value)
+	{
+		return false;
+	}
 }

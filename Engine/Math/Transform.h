@@ -1,11 +1,12 @@
 #pragma once
+#include "Core/Serializable.h"
 #include "Vector2.h"
 #include "Matrix33.h"
 
 
 namespace nc
 {
-	struct Transform
+	struct Transform : public Serializable
 	{
 		Vector2 position;
 		float rotation = 0;
@@ -15,6 +16,9 @@ namespace nc
 		float localRotation = 0;
 		Vector2 localScale = 1;
 
+		// Inherited via Serializable
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		Matrix33 matrix;
 
@@ -24,5 +28,6 @@ namespace nc
 
 		void Update();
 		void Update(const Matrix33& mx);
+
 	};
 }

@@ -57,7 +57,7 @@ namespace nc
 		Vector2 size = texture->GetSize();
 		size = size * scale;
 
-		Vector2 newPosition = position - (size * .05);
+		Vector2 newPosition = position - (size * .05f);
 		SDL_Rect rect;
 		rect.x = static_cast<int>(newPosition.x);
 		rect.y = static_cast<int>(newPosition.y);
@@ -72,7 +72,7 @@ namespace nc
 		Vector2 size = texture->GetSize();
 		size = size * transform.scale;
 
-		Vector2 newPosition = transform.position - (size * .05);
+		Vector2 newPosition = transform.position - (size * .05f);
 		SDL_Rect rect;
 		rect.x = static_cast<int>(newPosition.x);
 		rect.y = static_cast<int>(newPosition.y);
