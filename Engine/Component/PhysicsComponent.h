@@ -14,6 +14,7 @@ namespace nc {
 	public:
 		Vector2 velocity;
 		Vector2 acceleration;
+		float damping = 1;
 
 	};
 }

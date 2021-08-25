@@ -1,6 +1,18 @@
 #pragma once
+
+#define REGISTER_CLASS(class) nc::ObjectFactory::Instance().Register<class>(#class);
+
+
 //systems
 #include "Audio/AudioSystem.h"
+
+//components
+#include "Component/Component.h"
+#include "Component/GraphicsComponent.h"
+#include "Component/PhysicsComponent.h"
+#include "Component/SpriteAnimationComponent.h"
+#include "Component/SpriteComponent.h"
+
 
 //math
 #include "Math/Vector2.h"
@@ -18,6 +30,8 @@
 //framework
 #include "Framework/System.h"
 #include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 //resource
 #include "Resource/ResourceSystem.h"
@@ -41,6 +55,7 @@
 
 namespace nc
 {
+	using ObjectFactory = Singleton<Factory<std::string, Object>>;
 	class Engine
 	{
 	public:

@@ -24,6 +24,12 @@ namespace nc
 		void AddChild(std::unique_ptr<Actor> actor);
 
 		float GetRadius();
+		template<class T>
+		T* AddComponent();
+		
+		template<class T>
+		T* GetComponent();
+
 
 		void AddComponent(std::unique_ptr<Component> component);
 
@@ -44,4 +50,14 @@ namespace nc
 		std::vector<std::unique_ptr<Component>> components;
 
 	};
+	template<class T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& actor : actors)
+		{
+			if (dynamic_cast<T*>(actor.get())) return dynamic_cast<T*>(actor.get());
+		}
+
+		return nullptr;
+	}
 }
