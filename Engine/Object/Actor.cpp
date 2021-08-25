@@ -1,9 +1,5 @@
 #include "Actor.h"
-#include "Graphics/Renderer.h"
-#include "Component/GraphicsComponent.h"
-#include "Math/Random.h"
-#include "Math/MathUtil.h"
-#include "Component/Component.h"
+#include "Engine.h"
 #include <algorithm>
 
 namespace nc
@@ -61,8 +57,8 @@ namespace nc
 				auto component = ObjectFactory::Instance().Create<Component>(type);
 				if (component) {
 					component->owner = this;
-					component->read(value);
-					AddComponent(component);
+					component->Read(componentValue);
+					AddComponent(std::move(component));
 
 				}
 			}

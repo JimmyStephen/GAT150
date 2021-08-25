@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Math/MathUtil.h"
+#include "Math/Vector2.h"
 #include <SDL_image.h>
 #include <iostream>
 #include <SDL_ttf.h> 
@@ -80,5 +81,20 @@ namespace nc
 		rect.h = static_cast<int>(size.y);
 
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &rect, nc::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
+	}
+
+	void Renderer::Draw(std::shared_ptr<nc::Texture> texture, const SDL_Rect& source, const Transform& transform)
+	{
+		Vector2 size = texture->GetSize();
+		size = size * transform.scale;
+		Vector2 newPosition = transform.position - (size * .05f);
+
+		SDL_Rect rect;
+		rect.x = static_cast<int>(newPosition.x);
+		rect.y = static_cast<int>(newPosition.y);
+		rect.w = static_cast<int>(size.x);
+		rect.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, &source, &rect, nc::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
 	}
 }

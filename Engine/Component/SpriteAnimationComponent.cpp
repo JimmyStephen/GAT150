@@ -31,6 +31,8 @@ namespace nc
     {
         renderer->Draw(texture, rect, owner->transform);
     }
+
+
     bool SpriteAnimationComponent::Write(const rapidjson::Value& value) const
     {
         return false;

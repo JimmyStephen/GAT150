@@ -77,8 +77,8 @@ namespace nc
 				auto actor = ObjectFactory::Instance().Create<Actor>(type);
 				if (actor) {
 					actor->scene = this;
-					actor->Read(value);
-					AddActor(actor);
+					actor->Read(actorValue);
+					AddActor(std::move(actor));
 
 				}
 			}
