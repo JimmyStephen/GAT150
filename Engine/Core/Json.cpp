@@ -90,9 +90,9 @@ namespace nc
 			auto& array = value[name.c_str()];
 			for (rapidjson::SizeType i = 0; i < array.Size(); i++)
 			{
-					data.r = array[i].GetFloat();
-					data.g = array[i].GetFloat();
-					data.b = array[i].GetFloat();
+				if (array[i].IsNumber()) {
+					data[i] = array[i].GetFloat();
+				}
 			}
 
 			return true;

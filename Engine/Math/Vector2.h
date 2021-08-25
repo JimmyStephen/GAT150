@@ -38,6 +38,9 @@ namespace nc
 		Vector2& operator *= (float s) { x *= s; y *= s; return *this; }
 		Vector2& operator /= (float s) { x /= s; y /= s; return *this; }
 
+		friend std::ostream& operator << (std::ostream& stream, Vector2& v);
+		friend std::istream& operator >> (std::istream& stream, Vector2& v);
+
 		//------------------------------------------------------------
 
 		Vector2 operator - () const { return Vector2{ -x, -y }; }
@@ -56,7 +59,6 @@ namespace nc
 		static float SignedAngle(const Vector2& v1, const Vector2& v2);
 		static float Dot(const Vector2& v1, const Vector2& v2);
 
-		friend std::istream& operator >> (std::istream& stream, Vector2& v);
 
 		static const Vector2 left;
 		static const Vector2 right;

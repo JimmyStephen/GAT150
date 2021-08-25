@@ -12,6 +12,11 @@ namespace nc
 	const Color Color::cyan{0,1,1};
 	const Color Color::orange{1, 0.5f, 0};
 
+	std::ostream& operator<<(std::ostream& stream, Color& c)
+	{
+		stream << "R: " << c.r << " G: " << c.g << " B: " << c.b;
+		return stream;
+	}
 
 	std::istream& operator >> (std::istream& stream, Color& c)
 	{

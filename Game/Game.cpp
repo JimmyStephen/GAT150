@@ -15,6 +15,7 @@ void Game::Initialize()
 
     nc::SetFilePath("../Resources");
 
+
     rapidjson::Document document;
     nc::json::Load("scene.txt", document);
     scene->Read(document);

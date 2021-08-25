@@ -31,6 +31,13 @@ namespace nc
 		Color operator + (const Color& color) { return Color{ r+color.r, b+color.b, g+color.g }; }
 		Color operator - (const Color& color) { return Color{ r-color.r, b-color.b, g-color.g }; }
 		Color operator * (float s) { return Color{ r*s, b*s, g*s }; }
+
+		float operator [] (size_t index) const { return (&r)[index]; }
+		float& operator [] (size_t index) { return (&r)[index]; }
+
+		friend std::ostream& operator << (std::ostream& stream, Color& c);
+		friend std::istream& operator >> (std::istream& stream, Color& c);
+
 		operator std::uint32_t() const {return ToRGB();}
 
 		std::uint32_t ToRGB() const
@@ -41,7 +48,6 @@ namespace nc
 			return (red | green << 8 | blue << 16);
 		}
 
-		friend std::istream& operator >> (std::istream& stream, Color& c);
 
 		static const Color white;
 		static const Color red;
