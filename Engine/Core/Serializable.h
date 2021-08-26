@@ -1,10 +1,13 @@
 #pragma once
 #include "Json.h"
 
-class Serializable
+namespace nc
 {
-public:
-	virtual ~Serializable() {};
-	virtual bool Write(const rapidjson::Value& value) const = 0;
-	virtual bool Read(const rapidjson::Value& value) = 0;
-};
+	class Serializable
+	{
+	public:
+		virtual ~Serializable() {};
+		virtual bool Write(const rapidjson::Value& value) const = 0;
+		virtual bool Read(const rapidjson::Value& value) = 0;
+	};
+}

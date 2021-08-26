@@ -4,7 +4,7 @@
 #include "Math/Color.h"
 #include <string>
 
-#define JSON_READ(value, data) 	nc::json::Get(value, #data, data);;
+#define JSON_READ(value, data) nc::json::Get(value, #data, data);
 
 namespace nc
 {

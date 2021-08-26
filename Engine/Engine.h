@@ -12,7 +12,7 @@
 #include "Component/PhysicsComponent.h"
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/SpriteComponent.h"
-
+#include "Component/RBPhysicsComponent.h"
 
 //math
 #include "Math/Vector2.h"
@@ -32,6 +32,9 @@
 #include "Framework/EventSystem.h"
 #include "Framework/Singleton.h"
 #include "Framework/Factory.h"
+
+//Physics
+#include "Physics/PhysicsSystem.h"
 
 //resource
 #include "Resource/ResourceSystem.h"

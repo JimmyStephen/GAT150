@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "GameComponent/PlayerComponent.h"
 
 //int global = 10;
 
@@ -8,6 +9,10 @@ void Game::Initialize()
     engine = std::make_unique<nc::Engine>(); //new Engine()
     engine->Startup();
     engine->Get<nc::Renderer>()->Create("Gat150", 800, 600);
+
+    //register classes
+    REGISTER_CLASS(PlayerComponent);
+
 
     //create scene
     scene = std::make_unique<nc::Scene>(); //new Scene()
@@ -19,6 +24,7 @@ void Game::Initialize()
     rapidjson::Document document;
     nc::json::Load("scene.txt", document);
     scene->Read(document);
+
 
     //std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 });
     //{

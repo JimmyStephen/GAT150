@@ -11,12 +11,14 @@ namespace nc
 		systems.push_back(std::make_unique<ResourceSystem>());
 		systems.push_back(std::make_unique<ParticleSystem>());
 		systems.push_back(std::make_unique<InputSystem>());
+		systems.push_back(std::make_unique<PhysicsSystem>());
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 		REGISTER_CLASS(Actor);
 		REGISTER_CLASS(SpriteComponent);
 		REGISTER_CLASS(SpriteAnimationComponent);
 		REGISTER_CLASS(PhysicsComponent);
+		REGISTER_CLASS(RBPhysicsComponent);
 	}
 	void Engine::Shutdown()
 	{

@@ -1,5 +1,5 @@
 #include "Json.h"
-#include "istreamwrapper.h"
+#include <istreamwrapper.h>
 #include <fstream>
 
 namespace nc

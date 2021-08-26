@@ -53,9 +53,9 @@ namespace nc
 	template<class T>
 	inline T* Actor::GetComponent()
 	{
-		for (auto& actor : actors)
+		for (auto& component : components)
 		{
-			if (dynamic_cast<T*>(actor.get())) return dynamic_cast<T*>(actor.get());
+			if (dynamic_cast<T*>(component.get())) return dynamic_cast<T*>(component.get());
 		}
 
 		return nullptr;

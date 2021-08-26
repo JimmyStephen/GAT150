@@ -1,20 +1,53 @@
 {
-	"actors":
-		{
-			"type":"Actor",
-			"tag":"Player",
-			"transform":{
-			"position":[400,300],
-			"rotation": 45
-			},
-			"components":[
-			{
-				"type":"SpriteComponent",
-				"textureName": "sf2.png"
-			},
-			{
-				"type":"PhysicsComponent"
-			}
-			]
-		}
+   "actors":[
+      {
+         "type":"Actor",
+         "tag":"Player",
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+                "type":"PlayerComponent",
+                "speed":2500
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.density":1,
+               "data.lockAngle": true,
+               "data.size":[64,96]
+            }
+         ]
+      }
+   ]
+},
+      {
+         "type":"Actor",
+         "tag":"Ground",
+         "transform":{
+            "position":[
+               400,
+               550
+            ],
+            "rotation":0
+         },
+         "components":[
+         {
+            "type": "SpriteComponent",
+            "textureName": ""Alex_Floor.png"
+         }
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.density":1,
+               "data.size":[800,20]
+            }
+         ]
+      }
+   ]
 }

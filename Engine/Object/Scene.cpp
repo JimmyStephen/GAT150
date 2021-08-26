@@ -67,6 +67,10 @@ namespace nc
 	{
 		return false;
 	}
+
+
+
+	//SOMETHIgNG IS WronG HeERE
 	bool Scene::Read(const rapidjson::Value& value)
 	{
 		if (value.HasMember("actors") && value["actors"].IsArray()) {
@@ -79,7 +83,6 @@ namespace nc
 					actor->scene = this;
 					actor->Read(actorValue);
 					AddActor(std::move(actor));
-
 				}
 			}
 		}
