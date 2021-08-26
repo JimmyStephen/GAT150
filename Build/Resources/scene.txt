@@ -8,24 +8,25 @@
                400,
                300
             ],
-            "rotation":0
+            "rotation":45
          },
          "components":[
             {
-                "type":"PlayerComponent",
-                "speed":2500
+               "type":"PlayerComponent",
+               "speed":150
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
                "data.density":1,
-               "data.lockAngle": true,
-               "data.size":[64,96]
+               "data.lockAngle":true,
+               "data.size":[
+                  64,
+                  96
+               ]
             }
          ]
-      }
-   ]
-},
+      },
       {
          "type":"Actor",
          "tag":"Ground",
@@ -33,19 +34,21 @@
             "position":[
                400,
                550
-            ],
-            "rotation":0
+            ]
          },
          "components":[
-         {
-            "type": "SpriteComponent",
-            "textureName": ""Alex_Floor.png"
-         }
+            {
+               "type":"SpriteComponent",
+               "textureName":"Ground.png"
+            },
             {
                "type":"RBPhysicsComponent",
-               "data.isDynamic":true,
+               "data.isDynamic":false,
                "data.density":1,
-               "data.size":[800,20]
+               "data.size":[
+                  800,
+                  20
+               ]
             }
          ]
       }

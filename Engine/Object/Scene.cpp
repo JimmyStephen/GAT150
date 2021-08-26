@@ -70,7 +70,7 @@ namespace nc
 
 
 
-	//SOMETHIgNG IS WronG HeERE
+	//SOMETHIgNG IS WronG HeERE (i think?)
 	bool Scene::Read(const rapidjson::Value& value)
 	{
 		if (value.HasMember("actors") && value["actors"].IsArray()) {
