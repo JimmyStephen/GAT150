@@ -1,6 +1,7 @@
 #include "SpriteComponent.h"
 #include "Graphics/Renderer.h"
 #include "Object/Actor.h"
+#include "Engine.h"
 
 namespace nc {
 	
@@ -19,6 +20,12 @@ namespace nc {
 	}
 	bool SpriteComponent::Read(const rapidjson::Value& value)
 	{
-		return false;
+		//idk what the below is for but its in the wrong spot
+		std::string textureName;
+		JSON_READ(value, textureName);
+		
+		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+
+		return true;
 	}
 }

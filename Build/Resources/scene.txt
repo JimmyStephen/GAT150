@@ -2,28 +2,83 @@
    "actors":[
       {
          "type":"Actor",
+         "name":"Player",
          "tag":"Player",
          "transform":{
             "position":[
                400,
                300
             ],
-            "rotation":45
+            "scale":[2,2],
+            "rotation":0
          },
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":150
+               "speed":15
+            },
+            {
+               "type":"SpriteAnimationComponent",
+               "textureName":"characters.png",
+               "fps":100000000,
+               "numFramesX":18,
+               "numFramesY":11,
+               "startFrame": 90,
+               "endFrame": 95,
+               "sequences":
+               [     
+               {"name": "idle", "sequence.fps": 100000000, "sequence.startFrame": 0,"sequence.endFrame": 1},
+               {"name": "walk", "sequence.fps": 100000000, "sequence.startFrame": 90,"sequence.endFrame": 95}
+               ]
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
-               "data.density":1,
-               "data.lockAngle":true,
-               "data.size":[
-                  64,
-                  96
-               ]
+               "data.density":0.5,
+               "data.lockAngle":false,
+               "data.restitution":0.1,
+               "data.gravityScale":0.5,
+               "data.size":[64,64]
+            },
+            {
+	            "type":"AudioComponent",
+	            "soundName":"audio/grunt.wav",
+	            "playOnAwake":true
+            }
+            
+         ]
+      },
+            {
+         "type":"Actor",
+         "tag":"Enemy",
+         "transform":{
+            "position":[
+               500,
+               200
+            ],
+            "scale":[2,2],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"EnemyComponent",
+               "speed":5
+            },
+            {
+               "type":"SpriteAnimationComponent",
+               "textureName":"bat.png",
+               "fps":1000000000,
+               "numFramesX":4,
+               "numFramesY":1
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.density":2,
+               "data.lockAngle":false,
+               "data.restitution":0.1,
+               "data.gravityScale":0,
+               "data.size":[64,64]
             }
          ]
       },
@@ -33,7 +88,7 @@
          "transform":{
             "position":[
                400,
-               550
+               590
             ]
          },
          "components":[
@@ -51,6 +106,29 @@
                ]
             }
          ]
-      }
+      },
+            		{
+			"type":"Actor",
+			"name":"Score",
+			"transform":{
+				"position":[
+					60,
+					20
+				]
+			},
+			"components":[
+				{
+					"type":"TextComponent",
+					"fontName":"fonts/ITCBLKAD.TTF",
+					"fontSize":16,
+					"color":[
+						1,
+						1,
+						1
+					],
+					"text":"Hello World!"
+				}
+			]
+		}
    ]
 }

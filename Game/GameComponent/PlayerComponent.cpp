@@ -14,6 +14,14 @@ void PlayerComponent::Update()
 	{
 		force.x += speed;
 	}
+	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_W) == InputSystem::eKeyState::Held)
+	{
+		force.y -= speed;
+	}
+	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_S) == InputSystem::eKeyState::Held)
+	{
+		force.y += speed;
+	}
 
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
 	assert(physicsComponent);

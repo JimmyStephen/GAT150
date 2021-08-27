@@ -13,7 +13,7 @@ namespace nc
             frameTimer = 0;
             frame++;
 
-            if (frame >= (numFramesX * numFramesY)) frame = 0;
+            if (frame > endFrame) frame = startFrame;
         }
 
         Vector2 size = texture->GetSize();
@@ -32,19 +32,44 @@ namespace nc
         renderer->Draw(texture, rect, owner->transform);
     }
 
+    void SpriteAnimationComponent::SetSequence(const std::string& name)
+    {
+
+    }
+
 
     bool SpriteAnimationComponent::Write(const rapidjson::Value& value) const
     {
         return false;
     }
+
+
     bool SpriteAnimationComponent::Read(const rapidjson::Value& value)
     {
         SpriteComponent::Read(value);
 
-        //idk what the below is for but its in the wrong spot
-        std::string textureName;
-        JSON_READ(value, textureName);
-        texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
+        JSON_READ(value, fps);
+        JSON_READ(value, numFramesX);
+        JSON_READ(value, numFramesY);
+        JSON_READ(value, startFrame);
+        JSON_READ(value, endFrame);
+
+
+        if (startFrame == 0 && endFrame == 0) endFrame = (numFramesX * numFramesY) - 1;
+        frame = startFrame;
+
+        if (value.HasMember("sequences") && value["sequences"].IsArray())
+        {
+            for (auto& sequenceValue : value["sequences"].GetArray()) {
+                std::string name;
+                JSON_READ(sequenceValue, name);
+
+                Sequince sequence;
+                JSON_READ(sequenceValue, sequence.fps);
+                JSON_READ(sequenceValue, sequence.startFrame);
+                JSON_READ(sequenceValue, sequence.endFrame);
+            }
+        }
 
         return true;
     }

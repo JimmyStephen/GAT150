@@ -62,15 +62,23 @@ namespace nc
 	{
 		actors.clear();
 	}
+
+	Actor* Scene::FindActor(const std::string& Name)
+	{
+		
+		for (auto& actor : actors)
+		{
+			if (actor->name == Name) return actor.get();
+		}
+
+		return nullptr;
+	}
 	
 	bool Scene::Write(const rapidjson::Value& value) const
 	{
 		return false;
 	}
 
-
-
-	//SOMETHIgNG IS WronG HeERE (i think?)
 	bool Scene::Read(const rapidjson::Value& value)
 	{
 		if (value.HasMember("actors") && value["actors"].IsArray()) {

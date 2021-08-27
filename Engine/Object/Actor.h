@@ -39,7 +39,7 @@ namespace nc
 	public:
 		bool destroy = false;
 		std::string tag;
-
+		std::string name;
 
 
 		Transform transform;

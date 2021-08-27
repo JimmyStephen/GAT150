@@ -58,7 +58,7 @@ namespace nc
 		Vector2 size = texture->GetSize();
 		size = size * scale;
 
-		Vector2 newPosition = position - (size * .05f);
+		Vector2 newPosition = position - (size * 0.5f);
 		SDL_Rect rect;
 		rect.x = static_cast<int>(newPosition.x);
 		rect.y = static_cast<int>(newPosition.y);
@@ -73,7 +73,7 @@ namespace nc
 		Vector2 size = texture->GetSize();
 		size = size * transform.scale;
 
-		Vector2 newPosition = transform.position - (size * .05f);
+		Vector2 newPosition = transform.position - (size * 0.5f);
 		SDL_Rect rect;
 		rect.x = static_cast<int>(newPosition.x);
 		rect.y = static_cast<int>(newPosition.y);
@@ -85,7 +85,7 @@ namespace nc
 
 	void Renderer::Draw(std::shared_ptr<nc::Texture> texture, const SDL_Rect& source, const Transform& transform)
 	{
-		Vector2 size = texture->GetSize();
+		Vector2 size = Vector2{ source.w, source.h };
 		size = size * transform.scale;
 		Vector2 newPosition = transform.position - (size * .05f);
 
