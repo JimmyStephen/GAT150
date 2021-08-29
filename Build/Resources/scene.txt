@@ -116,7 +116,7 @@
                "data.isSensor":true,
                "data.density":1,
                "data.lockAngle":true,
-               "data.restitution":0.1,
+               "data.restitution":0,
                "data.gravityScale":0,
                "data.size":[16,32]
             }
