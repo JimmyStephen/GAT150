@@ -113,6 +113,7 @@
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
+               "data.isSensor":true,
                "data.density":1,
                "data.lockAngle":true,
                "data.restitution":0.1,
