@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/System.h"
+#include "Object/Object.h"
 #include <functional>
 #include <variant>
 #include <string>
@@ -11,7 +12,8 @@ namespace nc
 	struct Event
 	{
 		std::string name;
-		std::variant<int, bool, float, std::string> data;
+		Object* receiver{ nullptr };
+		std::variant<int, bool, float, std::string, void*> data;
 	};
 
 	class EventSystem : public System
@@ -23,13 +25,14 @@ namespace nc
 		virtual void Shutdown() override;
 		virtual void Update(float dt) override;
 
-		void Subscribe(const std::string& name, function_t function);
+		void Subscribe(const std::string& name, function_t function, Object* receiver);
 		void Notify(const Event& event);
 
 	private:
 		struct Observer
 		{
 			function_t function;
+			Object* receiver;
 		};
 
 		std::map<std::string, std::list<Observer>> observers;

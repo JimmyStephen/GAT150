@@ -28,14 +28,16 @@
                "sequences":
                [     
                {"name": "idle", "sequence.fps": 100000000, "sequence.startFrame": 0,"sequence.endFrame": 1},
-               {"name": "walk", "sequence.fps": 100000000, "sequence.startFrame": 90,"sequence.endFrame": 95}
-               ]
+               {"name": "walk_left", "sequence.fps": 100000000, "sequence.startFrame": 90,"sequence.endFrame": 95},
+               {"name": "walk_right", "sequence.fps": 100000000, "sequence.startFrame": 162,"sequence.endFrame": 167}
+               ],
+               "defaultSequence": "idle"
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
                "data.density":0.5,
-               "data.lockAngle":false,
+               "data.lockAngle":true,
                "data.restitution":0.1,
                "data.gravityScale":0.5,
                "data.size":[64,64]
@@ -43,6 +45,9 @@
             {
 	            "type":"AudioComponent",
 	            "soundName":"audio/grunt.wav",
+                "volume":1,
+                "pitch":1,
+                "loop":false,
 	            "playOnAwake":true
             }
             

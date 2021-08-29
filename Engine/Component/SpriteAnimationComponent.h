@@ -8,7 +8,7 @@ namespace nc
     class SpriteAnimationComponent : public SpriteComponent
     {
     private:
-        struct Sequince {
+        struct Sequence {
             int fps{ 0 };
             int startFrame{ 0 };
             int endFrame{ 0 };
@@ -37,8 +37,8 @@ namespace nc
 
         SDL_Rect rect;
 
-        std::map<std::string, Sequince> sequinces;
+        std::map<std::string, Sequence> sequences;
 
-        std::string sequinceName;
+        std::string sequenceName;
     };
 }

@@ -14,7 +14,7 @@ namespace nc {
 		void AudioComponent::Play()
 		{
 			//<stop channel>
-			Stop();
+			channel.Stop();
 //			channel = <get audio system>->PlayAudio(soundName, volume, pitch, loop);
 			channel = owner->scene->engine->Get<AudioSystem>()->PlayAudio(soundName, volume, pitch, loop);
 
@@ -42,7 +42,9 @@ namespace nc {
 
 
 				// add the audio to the audio system if there's a valid soundName string
-				if (soundName != "") owner->scene->engine->Get<AudioSystem>()->AddAudio(soundName, soundName);
+			if (soundName != "") {
+				owner->scene->engine->Get<AudioSystem>()->AddAudio(soundName, soundName);
+			}
 
 			return true;
 		}

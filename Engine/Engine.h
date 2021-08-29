@@ -13,6 +13,8 @@
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/SpriteComponent.h"
 #include "Component/RBPhysicsComponent.h"
+#include "Component/AudioComponent.h"
+#include "Component/TextComponent.h"
 
 //math
 #include "Math/Vector2.h"

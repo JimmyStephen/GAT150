@@ -35,6 +35,15 @@ namespace nc
     void SpriteAnimationComponent::SetSequence(const std::string& name)
     {
 
+        if (sequenceName == name) return;
+
+        sequenceName = name;
+        if (sequences.find(name) != sequences.end()) {
+            Sequence sequence = sequences[name];
+            startFrame = sequence.startFrame;
+            endFrame = sequence.endFrame;
+            fps = sequence.fps;
+        }
     }
 
 
@@ -64,11 +73,17 @@ namespace nc
                 std::string name;
                 JSON_READ(sequenceValue, name);
 
-                Sequince sequence;
+                Sequence sequence;
                 JSON_READ(sequenceValue, sequence.fps);
                 JSON_READ(sequenceValue, sequence.startFrame);
                 JSON_READ(sequenceValue, sequence.endFrame);
+
+                sequences[name] = sequence;
             }
+
+            std::string defaultSequence;
+            JSON_READ(value, defaultSequence);
+            SetSequence(defaultSequence);
         }
 
         return true;
