@@ -6,7 +6,6 @@ namespace nc
 {
 	void Actor::Update(float dt)
 	{
-
 		std::for_each(components.begin(), components.end(), [](auto& component) {component->Update();});
 		transform.Update();
 		std::for_each(children.begin(), children.end(), [](auto& child) {child->transform.Update(child->parent->transform.matrix); });

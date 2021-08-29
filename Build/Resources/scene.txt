@@ -87,6 +87,40 @@
             }
          ]
       },
+           {
+         "type":"Actor",
+         "tag":"Pickup",
+         "transform":{
+            "position":[
+               300,
+               500
+            ],
+            "scale":[1,1],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"PickupComponent",
+               "speed":5
+            },
+            {
+               "type":"SpriteAnimationComponent",
+               "textureName":"coin.png",
+               "fps":20,
+               "numFramesX":8,
+               "numFramesY":1
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.density":1,
+               "data.lockAngle":true,
+               "data.restitution":0.1,
+               "data.gravityScale":0,
+               "data.size":[16,32]
+            }
+         ]
+      },
       {
          "type":"Actor",
          "tag":"Ground",
