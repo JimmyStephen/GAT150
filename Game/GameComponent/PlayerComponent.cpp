@@ -27,7 +27,7 @@ void PlayerComponent::Update()
 	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Pressed)
 	{
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
-		force.y -= 200;
+		force.y -= 400;
 	}
 	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_S) == InputSystem::eKeyState::Held)
 	{
@@ -60,6 +60,7 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 
 	if (istring_compare(actor->tag, "pickup")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
+		actor->destroy = true;
 	}
 }
 

@@ -48,7 +48,7 @@
                 "volume":1,
                 "pitch":1,
                 "loop":false,
-	            "playOnAwake":true
+	            "playOnAwake":false
             }
             
          ]
@@ -72,7 +72,7 @@
             {
                "type":"SpriteAnimationComponent",
                "textureName":"bat.png",
-               "fps":1000000000,
+               "fps":100,
                "numFramesX":4,
                "numFramesY":1
             },
@@ -80,7 +80,7 @@
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
                "data.density":2,
-               "data.lockAngle":false,
+               "data.lockAngle":true,
                "data.restitution":0.1,
                "data.gravityScale":0,
                "data.size":[64,64]
@@ -100,8 +100,7 @@
          },
          "components":[
             {
-               "type":"PickupComponent",
-               "speed":5
+               "type":"PickupComponent"
             },
             {
                "type":"SpriteAnimationComponent",

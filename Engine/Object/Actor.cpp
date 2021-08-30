@@ -28,7 +28,7 @@ namespace nc
 		event.name = "collision_enter";
 		event.data = other;
 		event.receiver = this;
-		scene->engine->Get<EventSystem>()->Notify(event);
+		if (!destroy) scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	void Actor::EndContact(Actor* other)
@@ -37,7 +37,7 @@ namespace nc
 		event.name = "collision_exit";
 		event.data = other;
 		event.receiver = this;
-		scene->engine->Get<EventSystem>()->Notify(event);
+		if (!destroy) scene->engine->Get<EventSystem>()->Notify(event);
 	}
 	
 	void Actor::AddComponent(std::unique_ptr<Component> component)

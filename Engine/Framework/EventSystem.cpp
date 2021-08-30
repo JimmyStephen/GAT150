@@ -6,12 +6,10 @@ namespace nc
 	{
 	
 	}
-	
 	void EventSystem::Shutdown()
 	{
 	
 	}
-	
 	void EventSystem::Update(float dt)
 	{
 	
