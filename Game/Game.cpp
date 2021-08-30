@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "GameComponent/PlayerComponent.h"
 #include "GameComponent/EnemyComponent.h"
+#include "GameComponent/PickupComponent.h"
 
 //int global = 10;
 
@@ -14,6 +15,7 @@ void Game::Initialize()
     //register classes
     REGISTER_CLASS(PlayerComponent);
     REGISTER_CLASS(EnemyComponent);
+    REGISTER_CLASS(PickupComponent);
 
 
     //create scene

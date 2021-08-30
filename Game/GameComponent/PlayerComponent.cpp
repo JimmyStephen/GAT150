@@ -9,7 +9,6 @@ void PlayerComponent::Create()
 	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1), owner);
 
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("hurt", "audio/hurt.wav");
-	owner->scene->engine->Get<AudioSystem>()->AddAudio("coin", "audio/coin.wav");
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("jump", "audio/jump.mp3");
 }
 
@@ -56,11 +55,6 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 
 	if (istring_compare(actor->tag, "enemy")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
-	}
-
-	if (istring_compare(actor->tag, "pickup")) {
-		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
-		actor->destroy = true;
 	}
 }
 
