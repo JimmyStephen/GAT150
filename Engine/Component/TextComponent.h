@@ -11,6 +11,7 @@ class TextComponent : public GraphicsComponent
 public:
 	virtual void Update() override;
 	virtual void Draw(Renderer* renderer) override;
+	std::unique_ptr<Object> Clone() const { return std::make_unique<TextComponent>(*this); };
 
 	void SetText(const std::string& text);
 

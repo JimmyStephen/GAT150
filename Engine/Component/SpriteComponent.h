@@ -11,6 +11,7 @@ namespace nc {
 	public:
 		void Update() override;
 		void Draw(Renderer* renderer) override;
+		std::unique_ptr<Object> Clone() const { return std::make_unique<SpriteComponent>(*this); };
 
 		// Inherited via GraphicsComponent
 		virtual bool Write(const rapidjson::Value& value) const override;

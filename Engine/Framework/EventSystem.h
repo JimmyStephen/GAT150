@@ -19,6 +19,7 @@ namespace nc
 	class EventSystem : public System
 	{
 	public:
+		void Unsubscribe(const std::string& name, Object* receiver);
 		using function_t = std::function<void(const Event&)>;
 
 		virtual void Startup() override;

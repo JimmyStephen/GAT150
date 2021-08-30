@@ -8,6 +8,7 @@ namespace nc
     class SpriteAnimationComponent : public SpriteComponent
     {
     private:
+        std::unique_ptr<Object> Clone() const { return std::make_unique<SpriteAnimationComponent>(*this); };
         struct Sequence {
             int fps{ 0 };
             int startFrame{ 0 };

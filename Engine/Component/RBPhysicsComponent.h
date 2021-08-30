@@ -5,6 +5,8 @@
 namespace nc {
 	class RBPhysicsComponent : public PhysicsComponent {
 	public:
+		~RBPhysicsComponent();
+		std::unique_ptr<Object> Clone() const { return std::make_unique<RBPhysicsComponent>(*this); };
 		void Update() override;
 		void ApplyForce(const Vector2& force) override;
 		virtual bool Write(const rapidjson::Value& value) const override;
