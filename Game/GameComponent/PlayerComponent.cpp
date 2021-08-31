@@ -62,6 +62,11 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 	if (istring_compare(actor->tag, "enemy")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
 	}
+
+	//if (istring_compare(actor->tag, "pickup")) {
+	//	owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
+	//	actor->destroy = true;
+	//}
 }
 
 void PlayerComponent::OnCollisionExit(const nc::Event& event)

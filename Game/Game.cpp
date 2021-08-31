@@ -29,28 +29,11 @@ void Game::Initialize()
     nc::json::Load("scene.txt", document);
     scene->Read(document);
 
-
-    //std::unique_ptr<nc::Actor> actor = std::make_unique<nc::Actor>(nc::Transform{ nc::Vector2{400, 300}, 0, 1 });
-    //{
-    //    auto component = nc::ObjectFactory::Instance().Create<nc::SpriteAnimationComponent>("SpriteAnimationComponent");
-
-    //    //nc::SpriteComponent* component = actor->AddComponent<nc::SpriteComponent>();
-    //    //component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("character.png", engine->Get<nc::Renderer>());
-
-    //    //nc::SpriteAnimationComponent* component = actor->AddComponent<nc::SpriteAnimationComponent>();
-    //    component->texture = engine->Get<nc::ResourceSystem>()->Get<nc::Texture>("sparkle.png", engine->Get<nc::Renderer>());
-    //    component->fps = 24;
-    //    component->numFramesX = 8;
-    //    component->numFramesY = 8;
-    //    actor->AddComponent(std::move(component));
-
-    //}
-    //{
-        /* nc::PhysicsComponent component = actor->AddComponent<nc::PhysicsComponent>();
-        component->ApplyForce(nc::Vector2::right * 200); */
-    //}
-    //scene->AddActor(std::move(actor));
-
+    for (int i = 0; i < 1000; i++) {
+        auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("Coin");
+        actor->transform.position = nc::Vector2{ nc::RandomRange(0,800), nc::RandomRange(400,500) };
+        scene->AddActor(std::move(actor));
+    }
 }
 
 void Game::Shutdown()

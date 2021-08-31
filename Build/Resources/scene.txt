@@ -55,6 +55,8 @@
       },
             {
          "type":"Actor",
+         "prototype":true,
+         "name": "Bat",
          "tag":"Enemy",
          "transform":{
             "position":[
@@ -89,19 +91,16 @@
       },
            {
          "type":"Actor",
+         "prototype":true,
+         "name": "Coin",
          "tag":"Pickup",
          "transform":{
             "position":[
-               300,
+               200,
                500
-            ],
-            "scale":[1,1],
-            "rotation":0
+            ]
          },
          "components":[
-            {
-               "type":"PickupComponent"
-            },
             {
                "type":"SpriteAnimationComponent",
                "textureName":"coin.png",
@@ -110,14 +109,17 @@
                "numFramesY":1
             },
             {
+               "type":"PickupComponent"
+            },
+            {
                "type":"RBPhysicsComponent",
-               "data.isDynamic":true,
+               "data.isDynamic":false,
                "data.isSensor":true,
                "data.density":1,
                "data.lockAngle":true,
                "data.restitution":0,
                "data.gravityScale":0,
-               "data.size":[16,32]
+               "data.size":[40,40]
             }
          ]
       },

@@ -21,10 +21,10 @@ namespace nc
 
     };
 
-    template<class T, class TBase>
+    template<class TBase>
     class Prototype : public CreatorBase<TBase>
     {
-
+    public:
         Prototype(std::unique_ptr<TBase> instance) : instance{ std::move(instance) } {}
 
         std::unique_ptr<TBase> Create() const override
