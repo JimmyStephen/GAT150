@@ -14,6 +14,9 @@ public:
 
 	virtual void OnCollisionEnter(const nc::Event& event);
 	virtual void OnCollisionExit(const nc::Event& event);
+	void Shoot();
+	void readFile();
+
 
 	virtual bool Write(const rapidjson::Value& value) const override;
 	virtual bool Read(const rapidjson::Value& value) override;
@@ -21,6 +24,8 @@ public:
 public:
 	float speed{ 0 };
 	float jump{ 0 };
+	float fireRate{ 1 };
+	float fireCoolDown{ 0 };
 
 private:
 	std::list<nc::Actor*> contacts;

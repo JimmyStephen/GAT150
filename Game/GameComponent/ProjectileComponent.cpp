@@ -1,53 +1,75 @@
-//#include "PickupComponent.h"
-//#include "Engine.h"
-//
-//using namespace nc;
-//
-//PickupComponent::~ProjectileComponent()
-//{
-//	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
-//	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
-//}
-//
-//void PickupComponent::Create()
-//{
-//	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&ProjectileComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
-//	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&ProjectileComponent::OnCollisionExit, this, std::placeholders::_1), owner);
-//	owner->scene->engine->Get<AudioSystem>()->AddAudio("hit", "audio/coin.wav");
-//}
-//
-//void PickupComponent::Update()
-//{
-//
-//}
-//
-//void PickupComponent::OnCollisionEnter(const nc::Event& event)
-//{
-//	void* p = std::get<void*>(event.data);
-//	Actor* actor = reinterpret_cast<Actor*>(p);
-//
-//	if (istring_compare(actor->tag, "Enemy")) {
-//		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hit");
-//		actor->destroy = true;
-//		
-//	}
-//}
-//
-//void PickupComponent::OnCollisionExit(const nc::Event& event)
-//{
-//
-//}
-//
-//
-//bool PickupComponent::Write(const rapidjson::Value& value) const
-//{
-//	return false;
-//}
-//
-//bool PickupComponent::Read(const rapidjson::Value& value)
-//{
-//	JSON_READ(value, speed);
-//	return true;
-//}
-//
-//
+#include "ProjectileComponent.h"
+#include "Engine.h"
+
+using namespace nc;
+
+ProjectileComponent::~ProjectileComponent()
+{
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+}
+
+void ProjectileComponent::Create()
+{
+	Vector2 position = owner->scene->engine->Get<InputSystem>()->GetMousePosition();
+	fireTo = Vector2{ position.x, position.y };
+
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&ProjectileComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&ProjectileComponent::OnCollisionExit, this, std::placeholders::_1), owner);
+	//owner->scene->engine->Get<AudioSystem>()->AddAudio("hit", "audio/coin.wav");
+}
+
+void ProjectileComponent::Update()
+{
+	lifetime -= owner->scene->engine->time.deltaTime;
+	if(!owner->destroy) owner->destroy = (lifetime <= 0);
+	if (fireTo.x - owner->transform.position.x <= 10 && fireTo.y - owner->transform.position.y <= 10 &&
+		fireTo.x - owner->transform.position.x >= -10 && fireTo.y - owner->transform.position.y >= -10) owner->destroy = true;
+
+	Vector2 direction = fireTo - owner->transform.position;
+	Vector2 force = direction.Normalized() * speed;
+
+	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
+	assert(physicsComponent);
+	physicsComponent->ApplyForce(direction);
+
+}
+
+void ProjectileComponent::OnCollisionEnter(const nc::Event& event)
+{
+	void* p = std::get<void*>(event.data);
+	Actor* actor = reinterpret_cast<Actor*>(p);
+
+	if (istring_compare(actor->tag, "Enemy")) {
+		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("hit");
+		owner->destroy = true;		
+		actor->destroy = true;
+
+		Event event;
+		event.name = "add_score";
+		event.data = 100;
+		owner->scene->engine->Get<EventSystem>()->Notify(event);
+	}
+
+
+}
+
+void ProjectileComponent::OnCollisionExit(const nc::Event& event)
+{
+
+}
+
+
+bool ProjectileComponent::Write(const rapidjson::Value& value) const
+{
+	return false;
+}
+
+bool ProjectileComponent::Read(const rapidjson::Value& value)
+{
+	JSON_READ(value, speed);
+	JSON_READ(value, lifetime);
+	return true;
+}
+
+

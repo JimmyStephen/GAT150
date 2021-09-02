@@ -1,0 +1,51 @@
+{
+   "actors":[
+      {
+			"type":"Actor",
+			"name":"GameOver",
+			"transform":{
+				"position":[
+					400,
+					300
+				]
+			},
+			"components":[
+				{
+					"type":"TextComponent",
+					"fontName":"fonts/8514oem.fon",
+					"fontSize":48,
+					"color":[
+						0,
+						0,
+						0
+					],
+					"text":"Game Over"
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"name":"GameOver2",
+			"transform":{
+				"position":[
+					400,
+					350
+				]
+			},
+			"components":[
+				{
+					"type":"TextComponent",
+					"fontName":"fonts/8514oem.fon",
+					"fontSize":48,
+					"color":[
+						0,
+						0,
+						0
+					],
+					"text":"Press [Space] To Play Again Or [EXC] To Exit"
+				}
+			]
+		}
+        
+	]
+}

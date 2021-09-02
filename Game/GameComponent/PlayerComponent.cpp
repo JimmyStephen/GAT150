@@ -1,4 +1,5 @@
 #include "PlayerComponent.h"
+#include "ProjectileComponent.h"
 #include "Engine.h"
 
 using namespace nc;
@@ -9,17 +10,35 @@ PlayerComponent::~PlayerComponent()
 	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
 }
 
+void PlayerComponent::readFile() {
+	rapidjson::Document document;
+	nc::json::Load("actors.txt", document);
+	owner->scene->Read(document);
+}
+
 void PlayerComponent::Create()
 {
+	//readFile();
 	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
 	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_exit", std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1), owner);
 
-	owner->scene->engine->Get<AudioSystem>()->AddAudio("hurt", "audio/hurt.wav");
+	owner->scene->engine->Get<AudioSystem>()->AddAudio("fire", "audio/Game_Gunshot.mp3");
 	owner->scene->engine->Get<AudioSystem>()->AddAudio("jump", "audio/jump.mp3");
 }
 
 void PlayerComponent::Update()
 {
+	if (fireCoolDown <= 0) {
+		if (owner->scene->engine->Get<InputSystem>()->GetButtonState((int)InputSystem::eMouseButton::Left) == InputSystem::eKeyState::Held)
+		{
+			//Vector2 position = owner->scene->engine->Get<InputSystem>()->GetMousePosition();
+			//std::cout << position.x << " " << position.y << std::endl;
+			Shoot();
+		}
+		fireCoolDown = fireRate;
+	}
+	fireCoolDown -= owner->scene->engine->time.deltaTime;
+
 	Vector2 force = Vector2::zero;
 	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_A) == InputSystem::eKeyState::Held)
 	{
@@ -29,9 +48,8 @@ void PlayerComponent::Update()
 	{
 		force.x += speed;
 	}
-	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Pressed)
+	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Held && contacts.size() != 0  )
 	{
-		owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
 		force.y -= jump;
 	}
 
@@ -42,8 +60,9 @@ void PlayerComponent::Update()
 	SpriteAnimationComponent* spriteAnimationComponent = owner->GetComponent<SpriteAnimationComponent>();
 	assert(spriteAnimationComponent);
 
-	if (physicsComponent->velocity.x > 0) { spriteAnimationComponent->SetSequence("walk_left"); }
-	else if(physicsComponent->velocity.x < 0) { spriteAnimationComponent->SetSequence("walk_right"); }
+	if (physicsComponent->velocity.x > 1) { spriteAnimationComponent->SetSequence("walk_left"); }
+	else if (physicsComponent->velocity.x < -1) { spriteAnimationComponent->SetSequence("walk_right"); }
+
 }
 
 void PlayerComponent::OnCollisionEnter(const nc::Event& event)
@@ -51,19 +70,13 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 	void* p = std::get<void*>(event.data);
 	Actor* actor = reinterpret_cast<Actor*>(p);
 
-	if (istring_compare(actor->tag, "ground")) {
-		contacts.push_back(actor);
-		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
-	}
-
 	if (istring_compare(actor->tag, "enemy")) {
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("hurt");
+		owner->destroy = true;
 	}
-
-	//if (istring_compare(actor->tag, "pickup")) {
-	//	owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
-	//	actor->destroy = true;
-	//}
+	if (istring_compare(actor->tag, "ground")) {
+		contacts.push_back(actor);
+	}
 }
 
 void PlayerComponent::OnCollisionExit(const nc::Event& event)
@@ -74,6 +87,22 @@ void PlayerComponent::OnCollisionExit(const nc::Event& event)
 	if (istring_compare(actor->tag, "ground")) {
 		contacts.remove(actor);
 	}
+}
+
+void PlayerComponent::Shoot()
+{
+	//HELP
+	//auto actor = nc::ObjectFactory::Instance().Create<ProjectileComponent>("Bullet");
+	//assert(actor);
+	//actor->owner->transform.position = owner->transform.position;
+	//actor->fireTo = nc::Vector2{ x,y };
+	//owner->scene->AddActor(std::move(actor->owner));
+
+	owner->scene->engine->Get<AudioSystem>()->PlayAudio("fire");
+	auto actor = nc::ObjectFactory::Instance().Create<Actor>("Bullet");
+	assert(actor);
+	actor->transform.position = owner->transform.position;
+	owner->scene->AddActor(std::move(actor));
 }
 
 

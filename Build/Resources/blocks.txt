@@ -4,7 +4,7 @@
          "type":"Actor",
          "prototype":true,
          "name":"tile01",
-         "tag":"Wall",
+         "tag":"Background",
          "transform":{
             "scale":[2,2]
          },
@@ -12,7 +12,7 @@
                 {
                    "type":"SpriteComponent",
                    "textureName":"tileset2_32x32.png",
-                   "rect":[416,128,32,32]
+                   "rect":[384,448,32,32]
                 },
                 {
                    "type":"RBPhysicsComponent",
@@ -27,7 +27,7 @@
              "type":"Actor",
              "prototype":true,
              "name":"tile02",
-             "tag":"Ground",
+             "tag":"Wall",
              "transform":{
                 "scale":[2,2]
              },
@@ -35,12 +35,12 @@
                 {
                    "type":"SpriteComponent",
                    "textureName":"tileset2_32x32.png",
-                   "rect":[352,32,32,32]
+                   "rect":[160,224,32,32]
                 },
                 {
                    "type":"RBPhysicsComponent",
                    "data.isDynamic":false,
-                   "data.restitution":100,
+                   "data.restitution":0.1,
                    "data.density":1,
                    "data.size":[64,64]
                 } 
@@ -58,7 +58,7 @@
                 {
                    "type":"SpriteComponent",
                    "textureName":"tileset2_32x32.png",
-                   "rect":[0,32,32,32]
+                   "rect":[0,288,32,32]
                 },
                 {
                    "type":"RBPhysicsComponent",

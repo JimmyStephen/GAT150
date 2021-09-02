@@ -1,0 +1,22 @@
+{
+   "actors":[
+        {
+                 "type":"Actor",
+                 "name":"background",
+                 "tag":"Background",
+                 "components":[
+                        {
+                           "type":"SpriteComponent",
+                           "textureName":"Background.png"
+                        },
+                        {
+                           "type":"RBPhysicsComponent",
+                           "data.isDynamic":false,
+                           "data.density":1,
+                           "data.isSensor":true,
+                           "data.size":[800,600]
+                        }
+                    ]
+                  }
+            ]
+        }

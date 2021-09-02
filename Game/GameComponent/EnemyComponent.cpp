@@ -3,6 +3,11 @@
 
 using namespace nc;
 
+void EnemyComponent::Create()
+{
+	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&EnemyComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
+}
+
 void EnemyComponent::Update()
 {
 	Actor* player = owner->scene->FindActor("Player");
@@ -11,10 +16,11 @@ void EnemyComponent::Update()
 		Vector2 force = direction.Normalized() * speed;
 
 		PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
-
 		assert(physicsComponent);
 		physicsComponent->ApplyForce(force);
 	}
+
+
 }
 
 bool EnemyComponent::Write(const rapidjson::Value& value) const
@@ -28,3 +34,16 @@ bool EnemyComponent::Read(const rapidjson::Value& value)
 	return true;
 }
 
+void EnemyComponent::OnCollisionEnter(const nc::Event& event){
+	void* p = std::get<void*>(event.data);
+	Actor* actor = reinterpret_cast<Actor*>(p);
+
+	if (istring_compare(actor->tag, "Projectile")) {
+		auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("D_Duck");
+        actor->transform.position = owner->transform.position;
+        owner->scene->AddActor(std::move(actor));
+	}
+	if (istring_compare(actor->tag, "Ground")) {
+		owner->destroy = true;
+	}
+}

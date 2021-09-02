@@ -7,64 +7,76 @@
          "transform":{
             "position":[
                400,
-               300
-            ],
-            "scale":[2,2],
-            "rotation":0
+               500
+            ]
          },
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":8,
-               "jump":100
+               "speed":500,
+               "jump":0
             },
             {
                "type":"SpriteAnimationComponent",
-               "textureName":"characters.png",
+               "textureName":"Dog.png",
                "fps":32,
-               "numFramesX":18,
-               "numFramesY":11,
-               "startFrame": 90,
-               "endFrame": 95,
-               "sequences":
-               [     
-               {"name": "idle", "sequence.fps": 32, "sequence.startFrame": 0,"sequence.endFrame": 1},
-               {"name": "walk_left", "sequence.fps": 32, "sequence.startFrame": 90,"sequence.endFrame": 95},
-               {"name": "walk_right", "sequence.fps": 32, "sequence.startFrame": 162,"sequence.endFrame": 167}
-               ],
-               "defaultSequence": "idle"
+               "numFramesX":1,
+               "numFramesY":1
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
-               "data.density":1,
+               "data.density":10,
                "data.lockAngle":true,
                "data.restitution":0,
-               "data.gravityScale":0.5,
-               "data.size":[16,32]
+               "data.gravityScale":1,
+               "data.size":[90,85]
+            }
+         ]
+      },            
+      {
+         "type":"Actor",
+         "prototype":true,
+         "name": "Bullet",
+         "tag":"Projectile",
+         "transform":{
+            "position":[
+               500,
+               200
+            ],
+            "scale":[0.5,0.5]
+         },
+         "components":[
+            {
+               "type":"ProjectileComponent",
+               "speed":5
             },
             {
-	            "type":"AudioComponent",
-	            "soundName":"audio/grunt.wav",
-                "volume":1,
-                "pitch":1,
-                "loop":false,
-	            "playOnAwake":false
+               "type":"SpriteComponent",
+               "textureName":"Bullet.png"
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isSensor":true,
+               "data.isDynamic":true,
+               "data.density":2,
+               "data.lockAngle":true,
+               "data.restitution":0,
+               "data.gravityScale":0,
+               "data.size":[64,64]
             }
-            
          ]
-      },
+        },
             {
          "type":"Actor",
          "prototype":true,
-         "name": "Bat",
+         "name": "Duck",
          "tag":"Enemy",
          "transform":{
             "position":[
                500,
                200
             ],
-            "scale":[2,2],
             "rotation":0
          },
          "components":[
@@ -74,12 +86,12 @@
             },
             {
                "type":"SpriteAnimationComponent",
-               "textureName":"bat.png",
+               "textureName":"Duck.png",
                "fps":10,
-               "numFramesX":4,
+               "numFramesX":3,
                "numFramesY":1,
-               "startFrame":1,
-               "endFrame":3
+               "startFrame":0,
+               "endFrame":2
 
             },
             {
@@ -89,6 +101,39 @@
                "data.lockAngle":true,
                "data.restitution":0,
                "data.gravityScale":0,
+               "data.size":[64,64]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "prototype":true,
+         "name": "D_Duck",
+         "tag":"Dead_Enemy",
+         "transform":{
+            "position":[
+               500,
+               200
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"EnemyComponent",
+               "speed":0
+            },
+            {
+               "type":"SpriteComponent",
+               "textureName":"Dead_Duck.png"
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.isSensor":true,
+               "data.density":2,
+               "data.lockAngle":true,
+               "data.restitution":0,
+               "data.gravityScale":1,
                "data.size":[64,64]
             }
          ]

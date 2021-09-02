@@ -68,29 +68,6 @@
 					"text":"Score: 0"
 				}
 			]
-		},
-        {
-			"type":"Actor",
-			"name":"Lives",
-			"transform":{
-				"position":[
-					740,
-					20
-				]
-			},
-			"components":[
-				{
-					"type":"TextComponent",
-					"fontName":"fonts/8514oem.fon",
-					"fontSize":16,
-					"color":[
-						1,
-						1,
-						1
-					],
-					"text":"Lives: 0"
-				}
-			]
 		}
 	]
 }
