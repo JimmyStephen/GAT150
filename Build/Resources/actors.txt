@@ -15,32 +15,33 @@
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":15
+               "speed":8,
+               "jump":100
             },
             {
                "type":"SpriteAnimationComponent",
                "textureName":"characters.png",
-               "fps":100000000,
+               "fps":32,
                "numFramesX":18,
                "numFramesY":11,
                "startFrame": 90,
                "endFrame": 95,
                "sequences":
                [     
-               {"name": "idle", "sequence.fps": 100000000, "sequence.startFrame": 0,"sequence.endFrame": 1},
-               {"name": "walk_left", "sequence.fps": 100000000, "sequence.startFrame": 90,"sequence.endFrame": 95},
-               {"name": "walk_right", "sequence.fps": 100000000, "sequence.startFrame": 162,"sequence.endFrame": 167}
+               {"name": "idle", "sequence.fps": 32, "sequence.startFrame": 0,"sequence.endFrame": 1},
+               {"name": "walk_left", "sequence.fps": 32, "sequence.startFrame": 90,"sequence.endFrame": 95},
+               {"name": "walk_right", "sequence.fps": 32, "sequence.startFrame": 162,"sequence.endFrame": 167}
                ],
                "defaultSequence": "idle"
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
-               "data.density":0.5,
+               "data.density":1,
                "data.lockAngle":true,
-               "data.restitution":0.1,
+               "data.restitution":0,
                "data.gravityScale":0.5,
-               "data.size":[64,64]
+               "data.size":[16,32]
             },
             {
 	            "type":"AudioComponent",
@@ -74,16 +75,19 @@
             {
                "type":"SpriteAnimationComponent",
                "textureName":"bat.png",
-               "fps":100,
+               "fps":10,
                "numFramesX":4,
-               "numFramesY":1
+               "numFramesY":1,
+               "startFrame":1,
+               "endFrame":3
+
             },
             {
                "type":"RBPhysicsComponent",
                "data.isDynamic":true,
                "data.density":2,
                "data.lockAngle":true,
-               "data.restitution":0.1,
+               "data.restitution":0,
                "data.gravityScale":0,
                "data.size":[64,64]
             }
@@ -122,54 +126,6 @@
                "data.size":[40,40]
             }
          ]
-      },
-      {
-         "type":"Actor",
-         "tag":"Ground",
-         "transform":{
-            "position":[
-               400,
-               590
-            ]
-         },
-         "components":[
-            {
-               "type":"SpriteComponent",
-               "textureName":"Ground.png"
-            },
-            {
-               "type":"RBPhysicsComponent",
-               "data.isDynamic":false,
-               "data.density":1,
-               "data.size":[
-                  800,
-                  20
-               ]
-            }
-         ]
-      },
-            		{
-			"type":"Actor",
-			"name":"Score",
-			"transform":{
-				"position":[
-					60,
-					20
-				]
-			},
-			"components":[
-				{
-					"type":"TextComponent",
-					"fontName":"fonts/ITCBLKAD.TTF",
-					"fontSize":16,
-					"color":[
-						1,
-						1,
-						1
-					],
-					"text":"Hello World!"
-				}
-			]
-		}
+        } 
    ]
 }

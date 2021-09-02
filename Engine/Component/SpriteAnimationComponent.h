@@ -36,8 +36,6 @@ namespace nc
         int startFrame = 0;
         int endFrame = 0;
 
-        SDL_Rect rect;
-
         std::map<std::string, Sequence> sequences;
 
         std::string sequenceName;

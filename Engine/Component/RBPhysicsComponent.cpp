@@ -22,6 +22,11 @@ namespace nc {
 
 	}
 
+	RBPhysicsComponent::RBPhysicsComponent(const RBPhysicsComponent& other)
+	{
+		data = other.data;
+	}
+
 	void RBPhysicsComponent::ApplyForce(const Vector2& force)
 	{
 		if (body) {

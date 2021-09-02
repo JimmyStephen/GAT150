@@ -32,7 +32,7 @@ namespace nc {
 //			font = <get resource system>->Get<Font>(fontName, &fontSize);
 //		texture = <get resource system>->Get<Texture>("texture", <get renderer>);
 		font = owner->scene->engine->Get<nc::ResourceSystem>()->Get<Font>(fontName, &fontSize);
-		texture = owner->scene->engine->Get<nc::ResourceSystem>()->Get<Texture>("texture", owner->scene->engine->Get<Renderer>());
+		texture = owner->scene->engine->Get<nc::ResourceSystem>()->Get<Texture>(unique_string("texture"), owner->scene->engine->Get<Renderer>());
 
 		SetText(text);
 

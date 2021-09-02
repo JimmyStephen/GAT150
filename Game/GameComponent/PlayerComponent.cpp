@@ -32,11 +32,7 @@ void PlayerComponent::Update()
 	if (contacts.size() > 0 && owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == InputSystem::eKeyState::Pressed)
 	{
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
-		force.y -= 400;
-	}
-	if (owner->scene->engine->Get<InputSystem>()->GetKeyState(SDL_SCANCODE_S) == InputSystem::eKeyState::Held)
-	{
-		force.y += speed;
+		force.y -= jump;
 	}
 
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
@@ -57,6 +53,7 @@ void PlayerComponent::OnCollisionEnter(const nc::Event& event)
 
 	if (istring_compare(actor->tag, "ground")) {
 		contacts.push_back(actor);
+		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("jump");
 	}
 
 	if (istring_compare(actor->tag, "enemy")) {
@@ -88,6 +85,7 @@ bool PlayerComponent::Write(const rapidjson::Value& value) const
 bool PlayerComponent::Read(const rapidjson::Value& value)
 {
 	JSON_READ(value, speed);
+	JSON_READ(value, jump);
 	return true;
 }
 

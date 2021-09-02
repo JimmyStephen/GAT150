@@ -44,6 +44,7 @@
 //Objects
 #include "Object/Actor.h"
 #include "Object/Scene.h"
+#include "Object/Tilemap.h"
 
 //core
 #include "Core/Utilities.h"

@@ -26,7 +26,7 @@ namespace nc
 		virtual void Shutdown() override;
 		virtual void Update(float dt) override;
 
-		void Subscribe(const std::string& name, function_t function, Object* receiver);
+		void Subscribe(const std::string& name, function_t function, Object* receiver = nullptr);
 		void Notify(const Event& event);
 
 	private:

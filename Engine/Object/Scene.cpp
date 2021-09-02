@@ -51,7 +51,7 @@ namespace nc
 		actors.clear();
 	}
 
-	Actor* Scene::FindActor(const std::string& Name)
+	Actor* Scene::FindActor(const std::string Name)
 	{
 		
 		for (auto& actor : actors)
