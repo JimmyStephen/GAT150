@@ -38,10 +38,10 @@ void EnemyComponent::OnCollisionEnter(const nc::Event& event){
 	void* p = std::get<void*>(event.data);
 	Actor* actor = reinterpret_cast<Actor*>(p);
 
-	if (istring_compare(actor->tag, "Projectile")) {
-		auto actor = nc::ObjectFactory::Instance().Create<nc::Actor>("D_Duck");
-        actor->transform.position = owner->transform.position;
-        owner->scene->AddActor(std::move(actor));
+	if (istring_compare(actor->tag, "Projectile") && istring_compare(owner->tag, "Enemy")) {
+		auto actor2 = nc::ObjectFactory::Instance().Create<nc::Actor>("D_Duck");
+        actor2->transform.position = owner->transform.position;
+        owner->scene->AddActor(std::move(actor2));
 	}
 	if (istring_compare(actor->tag, "Ground")) {
 		owner->destroy = true;

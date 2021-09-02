@@ -102,9 +102,11 @@ void Game::Draw()
 
 void Game::Reset()
 {
+    score = 0;
     scene->RemoveAllActor();
 
     rapidjson::Document document;
+
     nc::json::Load("blocks.txt", document);
     scene->Read(document);
 
@@ -117,19 +119,16 @@ void Game::Reset()
     tilemap.Read(document);
     tilemap.Create();
 
+    
     nc::json::Load("title.txt", document);
     scene->Read(document);
 
+
     state = eState::Title;
-    
 }
 
 void Game::Title()
 {
-    //if (!engine->Get<nc::AudioChannel>()->IsPlaying()) {
-    //    engine->Get<nc::AudioSystem>()->PlayAudio("Title_Screen");
-    //}
-
     if (engine->Get<nc::InputSystem>()->GetKeyState(SDL_SCANCODE_SPACE) == nc::InputSystem::eKeyState::Pressed)
     {
         auto title = scene->FindActor("Title");
@@ -138,12 +137,14 @@ void Game::Title()
         auto controls = scene->FindActor("Controls");
         assert(controls);
         controls->destroy = true;
+       
         state = eState::StartGame;
     }
 }
 
 void Game::StartGame()
 {
+    engine->Get<nc::AudioSystem>()->PlayAudio("Game_Start", .5f);
     rapidjson::Document document;
     nc::json::Load("actors.txt", document);
     scene->Read(document);

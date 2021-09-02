@@ -24,7 +24,7 @@ public:
 public:
 	float speed{ 0 };
 	float jump{ 0 };
-	float fireRate{ 1 };
+	float fireRate{ .75f };
 	float fireCoolDown{ 0 };
 
 private:

@@ -41,7 +41,6 @@ void ProjectileComponent::OnCollisionEnter(const nc::Event& event)
 	Actor* actor = reinterpret_cast<Actor*>(p);
 
 	if (istring_compare(actor->tag, "Enemy")) {
-		//owner->scene->engine->Get<AudioSystem>()->PlayAudio("hit");
 		owner->destroy = true;		
 		actor->destroy = true;
 

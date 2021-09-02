@@ -31,8 +31,6 @@ void PlayerComponent::Update()
 	if (fireCoolDown <= 0) {
 		if (owner->scene->engine->Get<InputSystem>()->GetButtonState((int)InputSystem::eMouseButton::Left) == InputSystem::eKeyState::Held)
 		{
-			//Vector2 position = owner->scene->engine->Get<InputSystem>()->GetMousePosition();
-			//std::cout << position.x << " " << position.y << std::endl;
 			Shoot();
 		}
 		fireCoolDown = fireRate;

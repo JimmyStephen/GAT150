@@ -242,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Resources\actors.txt" />
+    <Text Include="..\Build\Resources\audio.txt" />
     <Text Include="..\Build\Resources\background.txt" />
     <Text Include="..\Build\Resources\gameover.txt" />
     <Text Include="..\Build\Resources\map.txt" />

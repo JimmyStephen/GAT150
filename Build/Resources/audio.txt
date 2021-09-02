@@ -1,0 +1,16 @@
+{
+   "actors":[
+      {
+         "type":"Actor",
+         "name":"TitleAudio"
+         "components":[
+            {
+               "type":"AudioComponent",
+               "soundName": "Game_Title.mp3"
+               "loop": true,
+               "playOnAwake": true
+            }
+         ]
+      }
+    ]
+}

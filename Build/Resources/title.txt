@@ -19,7 +19,7 @@
 						0,
 						0
 					],
-					"text":"Press [Space] To Jump [A and D] To Move And, [Left Click] To Shoot"
+					"text":"Press [A and D] To Move And, [Left Click] To Shoot"
 				}
 			]
 		},

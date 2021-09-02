@@ -109,7 +109,7 @@
          "type":"Actor",
          "prototype":true,
          "name": "D_Duck",
-         "tag":"Dead_Enemy",
+         "tag":"Dead",
          "transform":{
             "position":[
                500,

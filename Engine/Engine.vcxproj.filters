@@ -273,5 +273,8 @@
     <Text Include="..\Build\Resources\background.txt">
       <Filter>Resources</Filter>
     </Text>
+    <Text Include="..\Build\Resources\audio.txt">
+      <Filter>Resources</Filter>
+    </Text>
   </ItemGroup>
 </Project>
